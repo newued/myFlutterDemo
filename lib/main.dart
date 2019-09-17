@@ -1,9 +1,13 @@
+import 'my_textStyle.dart';
 import 'package:flutter/material.dart';
-import 'RowColumn.dart';
-import 'PreFlex.dart';
-import 'WrapFlow.dart';
-import 'StackPositioned.dart';
-import 'PreAlign.dart';
+import './position/RowColumn.dart';
+import './position/PreFlex.dart';
+import './position/WrapFlow.dart';
+import './position/StackPositioned.dart';
+import './position/PreAlign.dart';
+
+import './container/Cpadding.dart';
+import './container/SizeLimit.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -11,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '布局类组件',
+      title: '常用组件',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -21,7 +25,9 @@ class MyApp extends StatelessWidget {
          "wrap_Flow":(context)=>WrapFlow(),
          "StackPositioned":(context)=>StackPositioned(),
          "PreAlign":(context)=>PreAlign(),
-        "/":(context)=> MyHomePage(title: '布局类组件'), //注册首页路由
+        "/":(context)=> MyHomePage(title: '常用组件'), //
+        "Cpadding":(context)=>Cpadding(),
+        "SizeLimit":(context)=>SizeLimit(),
       } ,
     );
   }
@@ -43,8 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Text('布局类容器',style: NavTstyle(),),
             RaisedButton(
               child:Text('row column布局'),
               onPressed: ()=>{
@@ -71,7 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('对齐与相对定位'),
               onPressed: ()=>{
               Navigator.pushNamed(context, 'PreAlign')
-            },)
+            },),
+            Divider(color: Colors.black26,),//分割线
+            Text('容器类组件',style: NavTstyle(),),
+            Text('容器类Widget一般只需要接收一个子Widget（child），他们直接或间接继承自（或包含）SingleChildRenderObjectWidget。'),
+            Text('容器类Widget一般只是包装其子Widget，对其添加一些修饰（补白或背景色等）、变换(旋转或剪裁等)、或限制(大小等)。'),
+            RaisedButton(
+              child:Text('padding容器'),
+              onPressed: ()=>{
+                Navigator.pushNamed(context, 'Cpadding')
+              },
+            ),
+            RaisedButton(
+              child:Text('SizeLimit容器'),
+              onPressed: ()=>{
+                Navigator.pushNamed(context, 'SizeLimit')
+              },
+            ),
           ],
         ),
       ),
